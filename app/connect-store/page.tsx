@@ -1,78 +1,82 @@
-import StoreConnectForm from '@/components/StoreConnectForm';
-import { Store, Shield, Zap } from 'lucide-react';
+'use client';
+
+import { ShoppingBag, Box, Truck, ArrowRight } from 'lucide-react';
 
 export default function ConnectStore() {
+  const platforms = [
+    {
+      icon: <ShoppingBag className="w-12 h-12 text-blue-600 dark:text-blue-500" />,
+      name: "Shopify",
+      description: "Connect your Shopify store to automate financing for your suppliers.",
+      status: "Available"
+    },
+    {
+      icon: <Box className="w-12 h-12 text-blue-600 dark:text-blue-500" />,
+      name: "WooCommerce",
+      description: "Integrate WooCommerce to streamline your supply chain financing.",
+      status: "Coming Soon"
+    },
+    {
+      icon: <Truck className="w-12 h-12 text-blue-600 dark:text-blue-500" />,
+      name: "Custom ERP",
+      description: "Connect your existing ERP system through our secure API.",
+      status: "Available"
+    }
+  ];
+
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
-            Connect Your Online Store
+    <main className="min-h-screen bg-white dark:bg-[#020817] transition-colors duration-300 pt-24">
+      <div className="container mx-auto px-4 py-12">
+        <div className="text-center mb-16">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 transition-colors duration-300">
+            Connect Your Store
           </h1>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            Seamlessly integrate your e-commerce platform with Cashiflo to start optimizing your payments and cashflow management.
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto transition-colors duration-300">
+            Integrate your e-commerce platform or ERP system with Cashiflo to automate your supply chain financing
           </p>
         </div>
 
-        {/* Benefits */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          <div className="text-center">
-            <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-              <Zap className="w-6 h-6 text-emerald-600" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {platforms.map((platform, index) => (
+            <div 
+              key={index}
+              className="p-8 rounded-2xl bg-white dark:bg-[#0A1128] border border-gray-200 dark:border-blue-900/20 transition-all duration-300 hover:shadow-lg group cursor-pointer"
+            >
+              <div className="mb-6">
+                {platform.icon}
+              </div>
+              <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-3 transition-colors duration-300">
+                {platform.name}
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-6 transition-colors duration-300">
+                {platform.description}
+              </p>
+              <div className="flex items-center justify-between">
+                <span className={`text-sm font-medium ${
+                  platform.status === 'Available' 
+                    ? 'text-green-600 dark:text-green-500' 
+                    : 'text-blue-600 dark:text-blue-500'
+                }`}>
+                  {platform.status}
+                </span>
+                <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-blue-600 dark:text-gray-500 dark:group-hover:text-blue-500 transition-colors duration-300" />
+              </div>
             </div>
-            <h3 className="font-semibold text-slate-900 mb-2">Instant Setup</h3>
-            <p className="text-slate-600">Connect your store in minutes with our simple integration process.</p>
-          </div>
-          <div className="text-center">
-            <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-              <Shield className="w-6 h-6 text-blue-600" />
-            </div>
-            <h3 className="font-semibold text-slate-900 mb-2">Secure Integration</h3>
-            <p className="text-slate-600">Bank-grade security with encrypted data transmission and storage.</p>
-          </div>
-          <div className="text-center">
-            <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-              <Store className="w-6 h-6 text-purple-600" />
-            </div>
-            <h3 className="font-semibold text-slate-900 mb-2">Multi-Platform</h3>
-            <p className="text-slate-600">Support for Shopify, WooCommerce, Magento, and more platforms.</p>
-          </div>
+          ))}
         </div>
 
-        <StoreConnectForm />
-
-        {/* FAQ Section */}
-        <div className="mt-16 max-w-3xl mx-auto">
-          <h2 className="text-2xl font-bold text-slate-900 mb-8 text-center">
-            Frequently Asked Questions
+        <div className="mt-16 text-center">
+          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4 transition-colors duration-300">
+            Don't see your platform?
           </h2>
-          <div className="space-y-6">
-            {[
-              {
-                question: 'What permissions does Cashiflo need?',
-                answer: 'We only request the minimum permissions needed to process payments and sync transaction data. We never access customer personal information or store passwords.'
-              },
-              {
-                question: 'How long does the integration take?',
-                answer: 'Most integrations are completed within 5-10 minutes. Our system automatically verifies your store and sets up the necessary webhooks.'
-              },
-              {
-                question: 'Can I disconnect my store anytime?',
-                answer: 'Yes, you can disconnect your store at any time from your dashboard settings. All data syncing will stop immediately.'
-              },
-              {
-                question: 'What happens to existing payment methods?',
-                answer: 'Cashiflo works alongside your existing payment processors. You can gradually migrate to our optimized routing or keep both systems running.'
-              }
-            ].map((faq, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg border border-gray-200">
-                <h3 className="font-semibold text-slate-900 mb-2">{faq.question}</h3>
-                <p className="text-slate-600">{faq.answer}</p>
-              </div>
-            ))}
-          </div>
+          <p className="text-gray-600 dark:text-gray-300 mb-8 transition-colors duration-300">
+            Contact our team to discuss custom integration options for your business
+          </p>
+          <button className="px-8 py-3 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white rounded-full transition-colors duration-300">
+            Contact Sales
+          </button>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { ThemeProvider } from '@/context/ThemeContext';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -10,8 +11,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: 'Frontend Battle',
-  description: 'Frontend Battle',
+  title: 'Cashiflo',
+  description: 'Supply chain financing solutions',
 };
 
 export default function RootLayout({
@@ -20,13 +21,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={poppins.className}>
-        <div className="min-h-screen flex flex-col">
-          <Navbar />
-          <main className="flex-grow">{children}</main>
-          <Footer />
-        </div>
+        <ThemeProvider>
+          <div className="min-h-screen flex flex-col bg-white dark:bg-[#020817] transition-colors duration-300">
+            <Navbar />
+            <main className="flex-grow">{children}</main>
+            <Footer />
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );

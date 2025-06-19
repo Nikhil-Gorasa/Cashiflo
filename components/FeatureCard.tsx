@@ -1,7 +1,8 @@
-import { DivideIcon as LucideIcon } from 'lucide-react';
+import { LucideProps } from 'lucide-react';
+import { FC } from 'react';
 
 interface FeatureCardProps {
-  icon: LucideIcon;
+  icon: FC<LucideProps>;
   title: string;
   description: string;
 }
